@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sports & Maths Mega Quiz</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#e3f2fd,#ffffff);
+    text-align:center;
+    margin:0;
+}
+.container{
+    max-width:600px;
+    margin:20px auto;
+    background:#fff;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+h2{color:#0d47a1;}
+input,button{
+    width:90%;
+    padding:10px;
+    margin:8px 0;
+    font-size:16px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+button{
+    background:#0d47a1;
+    color:#fff;
+    border:none;
+}
+.option{
+    background:#f1f1f1;
+    padding:10px;
+    margin:6px;
+    border-radius:8px;
+    cursor:pointer;
+}
+.option:hover{background:#bbdefb;}
+.correct{color:green;font-weight:bold;}
+.wrong{color:red;font-weight:bold;}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="start">
+<h2>🎮 Sports & Maths Quiz</h2>
+<input id="name" placeholder="Enter Student Name">
+<button onclick="startQuiz()">Start Quiz</button>
+</div>
+
+<div class="container" id="quiz" style="display:none;">
+<h2 id="qText"></h2>
+<div id="options"></div>
+<input id="textAns" placeholder="Type your answer" style="display:none;">
+<button id="submitBtn" onclick="checkText()" style="display:none;">Submit</button>
+<p id="msg"></p>
+</div>
+
+<div class="container" id="result" style="display:none;">
+<h2>🎉 Result</h2>
+<p id="final"></p>
+<p id="motivation"></p>
+</div>
+
+<script>
+let questions = [
+
+{type:"mcq", q:"National sport of India is?", options:["Cricket","Hockey","Football"], a:"Hockey"},
+
+{type:"mcq", q:"Which sport originated in India?", options:["Table Tennis","Kabaddi","Hockey"], a:"Kabaddi"},
+
+{type:"mcq", q:"Which is a traditional Indian sport also called Kushti?", options:["Boxing","Wrestling","Judo"], a:"Wrestling"},
+
+{type:"mcq", q:"National sport of Spain is?", options:["Soccer","Bull Fighting","Rugby"], a:"Bull Fighting"},
+
+{type:"mcq", q:"National sport common to Australia and UK?", options:["Soccer","Cricket","Swimming"], a:"Cricket"},
+
+{type:"mcq", q:"Durand Cup is associated with?", options:["Football","Cricket","Swimming"], a:"Football"},
+
+/* ✅ Wimbledon – Lawn Tennis */
+{type:"mcq", q:"Wimbledon Trophy is associated with?", options:["Football","Lawn Tennis","Cricket"], a:"Lawn Tennis"},
+
+{type:"mcq", q:"Major Dhyan Chand is associated with?", options:["Hockey","Cricket","Golf"], a:"Hockey"},
+
+{type:"one", q:"Which is the most popular sport in the world?", a:["football","soccer"]},
+
+{type:"one", q:"Which is the governing body for cricket in India?", a:["bcci"]},
+
+{type:"one", q:"After how many years is the Football World Cup held?", a:["4"]},
+
+/* ✅ FIXED – Tennis */
+{type:"one", q:"Which sport is played in a four-walled court?", a:["tennis"]},
+
+{type:"one", q:"When does India celebrate National Sports Day?", a:["29 august"]},
+
+{type:"one", q:"Product of length and breadth", a:["area"]},
+{type:"one", q:"Boundary of a closed plane figure", a:["perimeter"]},
+{type:"one", q:"A closed six sided figure", a:["hexagon"]},
+{type:"one", q:"A line from centre of a circle to its circumference", a:["radius"]}
+
+];
+
+let i=0, score=0, student="";
+
+function startQuiz(){
+student=document.getElementById("name").value.trim();
+if(student===""){alert("Enter name");return;}
+start.style.display="none";
+quiz.style.display="block";
+loadQ();
+}
+
+function loadQ(){
+msg.innerHTML="";
+let q=questions[i];
+qText.innerText="Q"+(i+1)+". "+q.q;
+options.innerHTML="";
+textAns.value="";
+
+if(q.type==="mcq"){
+textAns.style.display="none";
+submitBtn.style.display="none";
+q.options.forEach(op=>{
+let d=document.createElement("div");
+d.className="option";
+d.innerText=op;
+d.onclick=()=>checkMCQ(op);
+options.appendChild(d);
+});
+}else{
+textAns.style.display="block";
+submitBtn.style.display="block";
+}
+}
+
+function checkMCQ(sel){
+if(sel===questions[i].a){score++;show(true);}
+else show(false,questions[i].a);
+}
+
+function checkText(){
+let ua=textAns.value.toLowerCase().trim();
+let answers=questions[i].a;
+if(answers.includes(ua)){score++;show(true);}
+else show(false,answers[0]);
+}
+
+function show(ok,ans=""){
+msg.innerHTML= ok?"✅ Correct!":"❌ Incorrect! Correct answer: "+ans;
+msg.className= ok?"correct":"wrong";
+setTimeout(()=>{
+i++;
+i<questions.length?loadQ():finish();
+},1200);
+}
+
+function finish(){
+quiz.style.display="none";
+result.style.display="block";
+final.innerHTML="<b>"+student+"</b><br>Marks Scored: "+score+" / "+questions.length;
+if(score>=questions.length-2)
+motivation.innerText="🌟 Excellent performance!";
+else if(score>=questions.length/2)
+motivation.innerText="👍 Very good! Keep practicing.";
+else
+motivation.innerText="💪 Practice more, you’ll do better!";
+}
+</script>
+
+</body>
+</html>
