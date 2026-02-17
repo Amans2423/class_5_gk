@@ -3,7 +3,6 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sports Quiz</title>
-
 <style>
 body{font-family:Arial;background:#eef2ff;padding:15px}
 .box{background:white;padding:15px;border-radius:12px;max-width:520px;margin:auto}
@@ -13,7 +12,6 @@ button{padding:10px;margin-top:10px;width:100%;background:#4CAF50;color:white;bo
 .hidden{display:none}
 </style>
 </head>
-
 <body>
 
 <div class="box" id="firstPage">
@@ -26,66 +24,63 @@ Class & Section:<br><input type="text" id="sclass"><br><br>
 <div class="box hidden" id="quizPage">
 <h3 id="info"></h3>
 
+<!-- SECTION 1 -->
+<div id="sec1">
 <h3>Section 1 : MCQ</h3>
-
 <p>1. National sport of India?</p>
 <input type="radio" name="q1" value="h"> Hockey<br>
 <input type="radio" name="q1" value="c"> Cricket<br>
-<input type="radio" name="q1" value="f"> Football<br>
-<div id="a1"></div>
+<input type="radio" name="q1" value="f"> Football<br><div id="a1"></div>
 
 <p>2. Durand Cup is associated with?</p>
 <input type="radio" name="q2" value="f"> Football<br>
 <input type="radio" name="q2" value="c"> Cricket<br>
-<input type="radio" name="q2" value="s"> Swimming<br>
-<div id="a2"></div>
+<input type="radio" name="q2" value="s"> Swimming<br><div id="a2"></div>
 
 <p>3. Major Dhyan Chand is associated with?</p>
 <input type="radio" name="q3" value="h"> Hockey<br>
 <input type="radio" name="q3" value="b"> Badminton<br>
-<input type="radio" name="q3" value="g"> Golf<br>
-<div id="a3"></div>
+<input type="radio" name="q3" value="g"> Golf<br><div id="a3"></div>
 
 <p>4. Wimbledon Trophy is for?</p>
 <input type="radio" name="q4" value="t"> Lawn Tennis<br>
 <input type="radio" name="q4" value="c"> Cricket<br>
-<input type="radio" name="q4" value="f"> Football<br>
-<div id="a4"></div>
+<input type="radio" name="q4" value="f"> Football<br><div id="a4"></div>
 
 <p>5. Who is called The Flying Sikh?</p>
 <input type="radio" name="q5" value="m"> Milkha Singh<br>
 <input type="radio" name="q5" value="d"> Dhyan Chand<br>
-<input type="radio" name="q5" value="y"> Yuvraj Singh<br>
-<div id="a5"></div>
+<input type="radio" name="q5" value="y"> Yuvraj Singh<br><div id="a5"></div>
 
-<button onclick="check1()">Check Section 1</button>
+<button onclick="check1()">Check Answers</button>
+<button onclick="next1()">Next Section ➡</button>
+</div>
 
-<hr>
-
+<!-- SECTION 2 -->
+<div id="sec2" class="hidden">
 <h3>Section 2 : Write the Sport Name</h3>
+1. Saina Nehwal : <input id="s1"><div id="sa1"></div>
+2. Vishwanathan Anand : <input id="s2"><div id="sa2"></div>
+3. Gagan Narang : <input id="s3"><div id="sa3"></div>
+4. Mary Kom : <input id="s4"><div id="sa4"></div>
+5. Mahendra Singh Dhoni : <input id="s5"><div id="sa5"></div>
+<button onclick="check2()">Check Answers</button>
+<button onclick="next2()">Next Section ➡</button>
+</div>
 
-1. Saina Nehwal : <input id="s1"> <div id="sa1"></div>
-2. Vishwanathan Anand : <input id="s2"> <div id="sa2"></div>
-3. Gagan Narang : <input id="s3"> <div id="sa3"></div>
-4. Mary Kom : <input id="s4"> <div id="sa4"></div>
-5. Mahendra Singh Dhoni : <input id="s5"> <div id="sa5"></div>
-
-<button onclick="check2()">Check Section 2</button>
-
-<hr>
-
+<!-- SECTION 3 -->
+<div id="sec3" class="hidden">
 <h3>Section 3 : Fill in the Blanks</h3>
+1. Most popular sport in the World? <input id="b1"><div id="ba1"></div>
+2. India National Sport Day date? <input id="b2"><div id="ba2"></div>
+3. From centre to circumference line = <input id="b3"><div id="ba3"></div>
+4. First satellite of India = <input id="b4"><div id="ba4"></div>
+5. Autobiography of Milkha Singh = <input id="b5"><div id="ba5"></div>
+<button onclick="check3()">Check Answers</button>
+<button onclick="next3()">Next Section ➡</button>
+</div>
 
-1. Most popular sport in the World? <input id="b1"> <div id="ba1"></div>
-2. India National Sport Day date? <input id="b2"> <div id="ba2"></div>
-3. From centre to circumference line = <input id="b3"> <div id="ba3"></div>
-4. First satellite of India = <input id="b4"> <div id="ba4"></div>
-5. Autobiography of Milkha Singh = <input id="b5"> <div id="ba5"></div>
-
-<button onclick="check3()">Check Section 3</button>
-
-<hr>
-
+<div id="sec4" class="hidden">
 <h3>Section 4 : Write answer in copy and practice</h3>
 <ol>
 <li>Name the games originated in India.</li>
@@ -95,66 +90,51 @@ Class & Section:<br><input type="text" id="sclass"><br><br>
 <li>Sport in which Eklavya and Arjun excelled.</li>
 <li>In which year Milkha Singh was awarded Padma Shri?</li>
 </ol>
+<h3>Quiz Finished ✔</h3>
+</div>
 
 </div>
 
 <script>
-
 function startQuiz(){
 let n=document.getElementById('sname').value.trim();
 let c=document.getElementById('sclass').value.trim();
-if(!n||!c){alert("Please fill Name and Class");return;}
+if(!n||!c){alert('Please fill Name and Class');return}
 document.getElementById('firstPage').style.display='none';
 document.getElementById('quizPage').style.display='block';
-document.getElementById('info').innerHTML="Name: "+n+" | Class: "+c;
+document.getElementById('info').innerHTML='Name: '+n+' | Class: '+c;
 }
 
 function check1(){
-let score=0;
 let ans=['h','f','h','t','m'];
-let correct=["Hockey","Football","Hockey","Lawn Tennis","Milkha Singh"];
-
+let correct=['Hockey','Football','Hockey','Lawn Tennis','Milkha Singh'];
 for(let i=1;i<=5;i++){
 let sel=document.querySelector('input[name=q'+i+']:checked');
-if(sel && sel.value==ans[i-1]){
-score++;
-document.getElementById('a'+i).innerHTML="<span class='correct'>Correct ✔</span>";
-}else{
-document.getElementById('a'+i).innerHTML="<span class='wrong'>Correct Answer: "+correct[i-1]+"</span>";
+if(sel && sel.value==ans[i-1]) document.getElementById('a'+i).innerHTML="<span class='correct'>Correct ✔</span>";
+else document.getElementById('a'+i).innerHTML="<span class='wrong'>Correct Answer: "+correct[i-1]+"</span>";
 }
 }
-alert("Section 1 Score = "+score+"/5");
-}
+function next1(){sec1.style.display='none';sec2.style.display='block';}
 
 function check2(){
 let ans=['badminton','chess','shooting','boxing','cricket'];
 for(let i=1;i<=5;i++){
 let val=document.getElementById('s'+i).value.toLowerCase().trim();
-if(val==ans[i-1])
-document.getElementById('sa'+i).innerHTML="<span class='correct'>Correct ✔</span>";
-else
-document.getElementById('sa'+i).innerHTML="<span class='wrong'>Correct Answer: "+ans[i-1]+"</span>";
+if(val==ans[i-1]) document.getElementById('sa'+i).innerHTML="<span class='correct'>Correct ✔</span>";
+else document.getElementById('sa'+i).innerHTML="<span class='wrong'>Correct Answer: "+ans[i-1]+"</span>";
 }
 }
+function next2(){sec2.style.display='none';sec3.style.display='block';}
 
 function check3(){
-let ans=[
-["football","soccer"],
-["29 august","29th august"],
-["radius"],
-["aryabhata","aryabhatta"],
-["the race of my life"]
-];
-
+let ans=[["football","soccer"],["29 august","29th august"],["radius"],["aryabhata","aryabhatta"],["the race of my life"]];
 for(let i=1;i<=5;i++){
 let val=document.getElementById('b'+i).value.toLowerCase().trim();
-if(ans[i-1].includes(val))
-document.getElementById('ba'+i).innerHTML="<span class='correct'>Correct ✔</span>";
-else
-document.getElementById('ba'+i).innerHTML="<span class='wrong'>Correct Answer: "+ans[i-1][0]+"</span>";
+if(ans[i-1].includes(val)) document.getElementById('ba'+i).innerHTML="<span class='correct'>Correct ✔</span>";
+else document.getElementById('ba'+i).innerHTML="<span class='wrong'>Correct Answer: "+ans[i-1][0]+"</span>";
 }
 }
-
+function next3(){sec3.style.display='none';sec4.style.display='block';}
 </script>
 </body>
 </html>
